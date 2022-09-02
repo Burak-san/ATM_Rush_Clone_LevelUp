@@ -19,7 +19,6 @@ namespace Managers
         #region Private Variables
 
         [ShowInInspector] private Vector3 _initialPosition;
-        private CameraTypes _cameraTypes = CameraTypes.InitializeCam;
         private Animator _camAnimator;
 
         #endregion

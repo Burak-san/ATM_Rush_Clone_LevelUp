@@ -8,7 +8,14 @@ namespace Controllers
 
         #region Serialize Variables
         [SerializeField] private float scrollSpeed = 0.05f;
-        [SerializeField] private Renderer renderer;
+        private static readonly int BaseMap = Shader.PropertyToID("_BaseMap");
+
+        #endregion
+
+        #region Private Variables
+
+        private new Renderer renderer = new Renderer();
+
         #endregion
 
         #endregion
@@ -21,7 +28,7 @@ namespace Controllers
         private void Update()
         {
             float offset = Time.time * scrollSpeed;
-            renderer.material.SetTextureOffset("_BaseMap", new Vector2(0, -offset));
+            renderer.material.SetTextureOffset(BaseMap, new Vector2(0, -offset));
         }
     }
 }

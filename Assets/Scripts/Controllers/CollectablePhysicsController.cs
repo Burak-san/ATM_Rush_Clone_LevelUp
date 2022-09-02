@@ -49,6 +49,7 @@ namespace Controllers
                 {
                     SetAtmScoreSignal(collectableManager.gameObject);
                     CollectableSignals.Instance.onCollideWalkingPlatform?.Invoke(collectableManager.gameObject);
+                    tag = "Uncollected";
                 }
             }
             if (other.CompareTag("Collected") && CompareTag("Uncollected"))

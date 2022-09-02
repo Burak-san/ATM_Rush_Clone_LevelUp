@@ -4,16 +4,24 @@ using UnityEngine;
 
 namespace Commands
 {
-    public class StackCollideWPlatformCommand:MonoBehaviour
+    public class StackCollideWPlatformCommand
     {
-        public void StackCollideWPlatform(GameObject gO, List<GameObject> stackList)
+        private GameObject _collectables;
+        private List<GameObject> _stackList;
+        public StackCollideWPlatformCommand(ref List<GameObject> stacList,ref GameObject collectables)
         {
-            stackList.Remove(gO);
-            stackList.TrimExcess();
-            if (stackList.Count==0)
+            _stackList = stacList;
+            _collectables = collectables;
+        }
+        public void Execute(GameObject gO)
+        {
+            if (_stackList.Count==0)
             {
                 ScoreSignals.Instance.onSetLevelScore?.Invoke();
             }
+            _stackList.Remove(gO);
+            _stackList.TrimExcess();
+            gO.transform.SetParent(_collectables.transform);
         }
     }
 }

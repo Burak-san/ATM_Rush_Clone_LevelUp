@@ -40,15 +40,9 @@ namespace Managers
         #endregion
         private void  OnSaveGame(SaveGameDataParams dataParams)
         {
-            if (dataParams.Level != null)
-            {
-                ES3.Save("Level",dataParams.Level);
-            }
+            ES3.Save("Level",dataParams.Level);
 
-            if (dataParams.Money != null)
-            {
-                ES3.Save("Money" ,dataParams.Money);
-            }
+            ES3.Save("Money" ,dataParams.Money);
         }
     }
 }

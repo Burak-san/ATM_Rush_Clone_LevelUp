@@ -1,3 +1,4 @@
+using Managers;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace Controllers
         #region Serialized Variables
         
         [SerializeField] private TextMeshProUGUI moneyText;
+        [SerializeField] private UIManager uiManager;
 
         #endregion
 

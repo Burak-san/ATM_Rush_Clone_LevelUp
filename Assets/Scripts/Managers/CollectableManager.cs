@@ -28,6 +28,8 @@ namespace Managers
 
         #region Private Variables
 
+        private GameObject _collectables;
+
         #endregion
 
         #endregion
@@ -35,6 +37,8 @@ namespace Managers
         private void Awake()
         {
             Data = GetCollectableData();
+            _collectables= GameObject.Find("Collectables");
+
         }
 
         private void Start()
@@ -81,7 +85,7 @@ namespace Managers
 
         private void OnTouchedWalkingPlatform(GameObject _gO)
         {
-            movementController.MoveOnWalkingPlatform(_gO);
+            movementController.MoveOnWalkingPlatform(_gO,_collectables);
         }
     }
 }

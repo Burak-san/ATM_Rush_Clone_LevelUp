@@ -31,4 +31,4 @@
 ## Used Patterns
 - Observer Pattern
 - Singleton
-- Almost Command Pattern :grin:
+- Command Pattern 

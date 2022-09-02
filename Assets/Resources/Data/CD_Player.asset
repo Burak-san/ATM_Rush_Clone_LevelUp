@@ -18,4 +18,4 @@ MonoBehaviour:
       SidewaysSpeed: 2.5
       ForwardForceSpeed: 10
     PullBackForceData:
-      PullBackForce: 120
+      PullBackForce: 200

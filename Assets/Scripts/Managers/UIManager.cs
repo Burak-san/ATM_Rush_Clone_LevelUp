@@ -13,10 +13,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private UIPanelController uiPanelController;
-
-        [SerializeField]
-        private LevelPanelController levelPanelController;
-
+        [SerializeField] private LevelPanelController levelPanelController;
         [SerializeField] private SteadyPanelController steadyPanelController;
 
         #endregion
@@ -45,7 +42,6 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
-            CoreGameSignals.Instance.onLevelInitialize += OnLevelInitialize;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             
         }
@@ -59,7 +55,6 @@ namespace Managers
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
-            CoreGameSignals.Instance.onLevelInitialize -= OnLevelInitialize;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
         }
         
@@ -81,10 +76,6 @@ namespace Managers
             uiPanelController.ClosePanel(panelParam);
         }
         
-        private void OnLevelInitialize()
-        {
-            
-        }
 
         private void OnPlay()
         {
@@ -143,15 +134,7 @@ namespace Managers
 
         private void LoadDefaultMoney()
         {
-            int defaultMoney;
-            if (!ES3.KeyExists("Money"))
-            {
-                defaultMoney = 0;
-            }
-            else
-            {
-                defaultMoney = ES3.Load<int>("Money");
-            }
+            var defaultMoney = !ES3.KeyExists("Money") ? 0 : ES3.Load<int>("Money");
             steadyPanelController.SetMoneyText(defaultMoney);
         }
     }

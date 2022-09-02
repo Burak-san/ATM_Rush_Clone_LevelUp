@@ -14,21 +14,22 @@ namespace Managers
 
         #region SerializeField Variables
 
-        [Space][SerializeField] private StackMovementController stackMovementController;
-        [SerializeField] private StackAnimationController stackAnimationController;
-        
+        [SerializeField] private StackMovementController stackMovementController;
         [SerializeField] private StackCollideWPlatformCommand stackCollideWPlatformCommand;
-        [SerializeField] private StackCollideAtmCommand stackCollideAtmCommand;
-        [SerializeField] private StackCollideObstacleCommand stackCollideObstacleCommand;
-        [SerializeField] private AddToStackCommand addToStackCommand;
 
         #endregion
 
         #region Private Variables
 
         [ShowInInspector] private List<GameObject> _stackMembers = new List<GameObject>();
-        private GameObject _collectables;
-        private bool _isSeperatedFromPlayer = false;
+        [ShowInInspector] private GameObject _collectables;
+        [ShowInInspector] private GameObject _player;
+
+        private AddToStackCommand _addToStackCommand;
+        private StackAnimationCommand _stackAnimationCommand;
+        private StackCollideAtmCommand _stackCollideAtmCommand;
+        private StackCollideObstacleCommand _stackCollideObstacleCommand;
+        private StackCollideWPlatformCommand _stackCollideWPlatformCommand;
 
         #endregion
 
@@ -37,6 +38,7 @@ namespace Managers
         private void Awake()
         {
             _collectables = GameObject.Find("Collectables");
+            Init();
         }
 
         #region Subscribe Events
@@ -48,18 +50,18 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            CollectableSignals.Instance.onAddStackList += OnTakeCollectableToStack;
-            CollectableSignals.Instance.onCollideObstacle += OnTouchedObstacle;
-            CollectableSignals.Instance.onCollideATM += OnCollideATM;
-            CollectableSignals.Instance.onCollideWalkingPlatform += OnCollideWalkingPlatform;
+            CollectableSignals.Instance.onAddStackList += _addToStackCommand.Execute;
+            CollectableSignals.Instance.onCollideObstacle += _stackCollideObstacleCommand.Execute;
+            CollectableSignals.Instance.onCollideATM += _stackCollideAtmCommand.Execute;
+            CollectableSignals.Instance.onCollideWalkingPlatform += _stackCollideWPlatformCommand.Execute;
         }
 
         private void UnsubscribeEvents()
         {
-            CollectableSignals.Instance.onAddStackList -= OnTakeCollectableToStack;
-            CollectableSignals.Instance.onCollideObstacle -= OnTouchedObstacle;
-            CollectableSignals.Instance.onCollideATM -= OnCollideATM;
-            CollectableSignals.Instance.onCollideWalkingPlatform -= OnCollideWalkingPlatform;
+            CollectableSignals.Instance.onAddStackList -= _addToStackCommand.Execute;
+            CollectableSignals.Instance.onCollideObstacle -= _stackCollideObstacleCommand.Execute;
+            CollectableSignals.Instance.onCollideATM -= _stackCollideAtmCommand.Execute;
+            CollectableSignals.Instance.onCollideWalkingPlatform -= _stackCollideWPlatformCommand.Execute;
         }
 
         private void OnDisable()
@@ -68,30 +70,19 @@ namespace Managers
         }
         
         #endregion
-
+        
         private void Update()
         {
-            stackMovementController.Lerp(_stackMembers);   
+            stackMovementController.Lerp(_stackMembers);
         }
 
-        private void OnTakeCollectableToStack(GameObject _gO)
+        private void Init()
         {
-            addToStackCommand.CollectableAddToStack(_stackMembers,_gO,stackAnimationController);
-        }
-
-        private void OnTouchedObstacle(GameObject gO,Vector3 obsPos)
-        {
-            stackCollideObstacleCommand.StackCollideWithObstacle(gO,obsPos,_stackMembers,_collectables);
-        }
-
-        private void OnCollideATM(GameObject gO)
-        {
-            stackCollideAtmCommand.StackCollideWithAtm(gO,_stackMembers);
-        }
-
-        private void OnCollideWalkingPlatform(GameObject gO)
-        { 
-            stackCollideWPlatformCommand.StackCollideWPlatform(gO,_stackMembers);
+            _stackAnimationCommand = new StackAnimationCommand(ref _stackMembers);
+            _addToStackCommand = new AddToStackCommand(ref _stackMembers,ref _stackAnimationCommand,this.transform,this);
+            _stackCollideAtmCommand = new StackCollideAtmCommand(ref _stackMembers);
+            _stackCollideObstacleCommand = new StackCollideObstacleCommand(ref _stackMembers, ref _collectables);
+            _stackCollideWPlatformCommand = new StackCollideWPlatformCommand(ref _stackMembers, ref _collectables);
         }
     }
 }

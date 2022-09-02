@@ -102,6 +102,7 @@ namespace Managers
 
         private int SetLastScore()
         {
+            
             return (int)(_score * _factor) + _totalScore;
         }
     }

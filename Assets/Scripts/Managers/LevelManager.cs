@@ -23,13 +23,13 @@ namespace Managers
 
         [Space] [SerializeField] private GameObject levelHolder;
         [SerializeField] private LevelLoaderCommand levelLoader;
-        [SerializeField] private ClearActiveLevelCommand levelClearer;
 
         #endregion
 
         #region Private Variables
 
         [ShowInInspector] private int _levelID;
+        private ClearActiveLevelCommand clearActiveLevelCommand;
 
         #endregion
 
@@ -37,8 +37,10 @@ namespace Managers
 
         private void Awake()
         {
+            
             _levelID =  GetActiveLevel();
             Data = GetLevelData();
+            clearActiveLevelCommand = new ClearActiveLevelCommand(ref levelHolder, this);
         }
 
         private int GetActiveLevel()
@@ -63,7 +65,7 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onLevelInitialize += OnInitializeLevel;
-            CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
+            CoreGameSignals.Instance.onClearActiveLevel += clearActiveLevelCommand.Execute;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
@@ -72,7 +74,7 @@ namespace Managers
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onLevelInitialize -= OnInitializeLevel;
-            CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
+            CoreGameSignals.Instance.onClearActiveLevel -= clearActiveLevelCommand.Execute;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
@@ -94,11 +96,6 @@ namespace Managers
         {
             var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").Levels.Count;
             levelLoader.InitializeLevel(newLevelData, levelHolder.transform);
-        }
-
-        private void OnClearActiveLevel()
-        {
-            levelClearer.ClearActiveLevel(levelHolder.transform);
         }
 
         private int OnGetLevelID()

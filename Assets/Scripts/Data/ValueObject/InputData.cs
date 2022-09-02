@@ -10,4 +10,4 @@ namespace Data.ValueObject
         public Vector2 ClampSides = new Vector2(-5, 5);
         public float ClampSpeed = 0.0007f;
     }
-}
+}   
