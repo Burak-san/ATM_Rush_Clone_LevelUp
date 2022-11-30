@@ -6,9 +6,9 @@
 *Hi:punch:,I'm from Turkey,and I do game development.*
 *We developed this game with my teammate for the second game of Levelup Academy. Detailed information about the game is given below. Have a nice day*
 
-***Tolga Karaca*** [<img src='https://user-images.githubusercontent.com/60696929/204913780-bc4bd27d-7974-4358-9e69-c81fb2aab317.png' alt='github' height='40' color='#bd2c00'>](https://github.com/tolgakrc)  [<img src='https://user-images.githubusercontent.com/60696929/204913769-5bce0e87-e30c-460e-a911-a99b83084e45.png' alt='linkedin' height='40'>](https://www.linkedin.com/in/tolga-karaca-7a5baa110//) :rewind:
+***Tolga Karaca*** [<img src='https://user-images.githubusercontent.com/60696929/204913780-bc4bd27d-7974-4358-9e69-c81fb2aab317.png' alt='github' height='40' color='#bd2c00'>](https://github.com/tolgakrc)  [<img src='https://user-images.githubusercontent.com/60696929/204913769-5bce0e87-e30c-460e-a911-a99b83084e45.png' alt='linkedin' height='40'>](https://www.linkedin.com/in/tolga-karaca-7a5baa110//)
 
-***Burak Orhan*** [<img src='https://user-images.githubusercontent.com/60696929/204913780-bc4bd27d-7974-4358-9e69-c81fb2aab317.png' alt='github' height='40' color='#6e5494'>](https://github.com/Burak-san)  [<img src='https://user-images.githubusercontent.com/60696929/204913769-5bce0e87-e30c-460e-a911-a99b83084e45.png' alt='linkedin' height='40'>](https://www.linkedin.com/in/burak-orhan-aohg2022//) :rewind:
+***Burak Orhan*** [<img src='https://user-images.githubusercontent.com/60696929/204913780-bc4bd27d-7974-4358-9e69-c81fb2aab317.png' alt='github' height='40' color='#6e5494'>](https://github.com/Burak-san)  [<img src='https://user-images.githubusercontent.com/60696929/204913769-5bce0e87-e30c-460e-a911-a99b83084e45.png' alt='linkedin' height='40'>](https://www.linkedin.com/in/burak-orhan-aohg2022//)
 
 ## GamePlay Screenshots
 
